@@ -1,0 +1,14 @@
+﻿<h3>رزومه ی شرکت آرمان سیستم فرتاک برتر</h3>
+<p class="Contributor">
+	گروه فاوان <br />
+	<a href="mailto:info@favangroup.com">info@favangroup.com</a><br />
+	<a href=http://www.favangroup.com>http://www.favangroup.com</a><br />
+</p>
+<hr/>
+<div class="License">
+	<h3>این ماژول جهت ثبت رزومه متقاضیان همکاری با شرکت آرمان سیستم فرتاک برتر ( فاوان ) طراحی شده است</h3>
+	<p class="Owner">
+		<b>Version CHANGEME</b><br /><br />
+	</p>
+	
+</div>

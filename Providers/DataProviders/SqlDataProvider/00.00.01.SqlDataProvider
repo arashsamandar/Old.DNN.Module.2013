@@ -1,0 +1,886 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_onvs]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_onvs]
+GO
+
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_onvs
+(
+	id int NOT NULL IDENTITY(1,1),
+	pid int NOT NULL,
+	ol nvarchar(MAX) NULL
+) ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_ttable]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_ttable]
+GO
+
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_ttable
+(
+	pid int NOT NULL IDENTITY(1,1),
+	tozihat nvarchar(MAX) NULL,
+	natijeh nvarchar(MAX) NULL
+) ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+/************************************************************/
+/*****                 ADD MAHARATHA                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addonvs') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addonvs
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addonvs
+@pid int,
+@ol nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_onvs]
+          (
+		  [pid],
+		  [ol]
+		  )
+    VALUES
+            (
+			@pid,
+			@ol
+            )
+Select @@Identity
+GO
+
+
+/************************************************************/
+/*****              GET  MAHARATHA                      *****/
+/************************************************************/
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_gonvs') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gonvs
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gonvs
+@pid int
+AS SELECT onvs.ol as 'مهارت ها' FROM {databaseOwner}{objectQualifier}FaavanResume1_onvs onvs  WHERE onvs.pid = @pid
+GO
+
+/************************************************************/
+/*****              RADDS TABLE                     *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_radds]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_radds]
+GO
+
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_radds
+(
+	id int NOT NULL IDENTITY(1,1),
+	pid int NOT NULL,
+	al nvarchar(MAX) NULL
+) ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_countrad') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_countrad
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_countrad
+@pid int
+as
+SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}FaavanResume1_radds WHERE pid=@pid
+GO
+
+/************************************************************/
+/*****              ADD RADDS TABLE                     *****/
+/************************************************************/
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addradds') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addradds
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addradds
+@pid int,
+@al nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_radds]
+          (
+		  [pid],
+		  [al]
+		  )
+    VALUES
+            (
+			@pid,
+			@al
+            )
+Select @@Identity
+GO
+
+
+
+/************************************************************/
+/*****              PR TABLE                    *****/
+/************************************************************/
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_pr]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_pr]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_pr
+(
+pid int NOT NULL IDENTITY(1,1),
+nms nvarchar(MAX),
+fml nvarchar(MAX),
+fname nvarchar(MAX),
+bday nvarchar(MAX),
+iid nvarchar(MAX),
+ms nvarchar(MAX),
+shotele nvarchar(MAX),
+emails nvarchar(MAX),
+address nvarchar(MAX),
+nv nvarchar(MAX)
+)ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}FaavanResume1_pr ADD CONSTRAINT
+    PK_{objectQualifier}FaavanResume1_pr PRIMARY KEY CLUSTERED
+    (
+    pid
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+
+
+/************************************************************/
+/*****              MA TABLE                     *****/
+/************************************************************/
+
+
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_ma]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_ma]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_ma
+(
+pid int NOT NULL IDENTITY(1,1),
+mth nvarchar(MAX) NULL,
+rth nvarchar(MAX) NULL,
+grs nvarchar(MAX) NULL,
+mtl nvarchar(MAX) NULL,
+sala nvarchar(MAX) NULL,
+mth2 nvarchar(MAX) NULL,
+rth2 nvarchar(MAX) NULL,
+grs2 nvarchar(MAX) NULL,
+mtl2 nvarchar(MAX) NULL,
+sala2 nvarchar(MAX) NULL,
+mth3 nvarchar(MAX) NULL,
+rth3 nvarchar(MAX) NULL,
+grs3 nvarchar(MAX) NULL,
+mtl3 nvarchar(MAX) NULL,
+sala3 nvarchar(MAX) NULL
+)ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}FaavanResume1_ma ADD CONSTRAINT
+    PK_{objectQualifier}FaavanResume1_ma PRIMARY KEY CLUSTERED
+    (
+    pid
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+/************************************************************/
+/*****              MK TABLE                     *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_mk]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_mk]
+GO
+
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_mk
+(
+pid int NOT NULL IDENTITY(1,1),
+shoghl1 nvarchar(MAX) NULL,
+shoro1 nvarchar(MAX) NULL,
+payan1 nvarchar(MAX) NULL,
+mahal1 nvarchar(MAX) NULL,
+elat1 nvarchar(MAX) NULL,
+shoghl2 nvarchar(MAX) NULL,
+shoro2 nvarchar(MAX) NULL,
+payan2 nvarchar(MAX) NULL,
+mahal2 nvarchar(MAX) NULL,
+elat2 nvarchar(MAX) NULL,
+shoghl3 nvarchar(MAX) NULL,
+shoro3 nvarchar(MAX) NULL,
+payan3 nvarchar(MAX) NULL,
+mahal3 nvarchar(MAX) NULL,
+elat3 nvarchar(MAX) NULL,
+shoghl4 nvarchar(MAX) NULL,
+shoro4 nvarchar(MAX) NULL,
+payan4 nvarchar(MAX) NULL,
+mahal4 nvarchar(MAX) NULL,
+elat4 nvarchar(MAX) NULL,
+shoghl5 nvarchar(MAX) NULL,
+shoro5 nvarchar(MAX) NULL,
+payan5 nvarchar(MAX) NULL,
+mahal5 nvarchar(MAX) NULL,
+elat5 nvarchar(MAX) NULL
+)ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}FaavanResume1_mk ADD CONSTRAINT
+    PK_{objectQualifier}FaavanResume1_mk PRIMARY KEY CLUSTERED
+    (
+    pid
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+/************************************************************/
+/*****              ADD INSERT CODES                    *****/
+/************************************************************/
+
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addpr') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addpr
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addpr
+@nms nvarchar(max),
+@fml nvarchar(max),
+@fname nvarchar(max),
+@bday nvarchar(max),
+@iid nvarchar(max),
+@ms nvarchar(max),
+@nv nvarchar(max),
+@shotele nvarchar(max),
+@emails nvarchar(max),
+@address nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_pr]
+          (
+		  [nms],
+[fml],
+[fname],
+[bday],
+[iid],
+[ms],
+[nv],
+[shotele],
+[emails],
+[address]
+		  )
+    VALUES
+            (
+			@nms,
+@fml,
+@fname,
+@bday,
+@iid,
+@ms,
+@nv,
+@shotele,
+@emails,
+@address
+            )
+Select @@Identity
+GO
+
+
+
+
+
+
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addma') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addma
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addma
+@mth nvarchar(max),
+@rth nvarchar(max),
+@grs nvarchar(max),
+@mtl nvarchar(max),
+@sala nvarchar(max),
+@mth2 nvarchar(max),
+@rth2 nvarchar(max),
+@grs2 nvarchar(max),
+@mtl2 nvarchar(max),
+@sala2 nvarchar(max),
+@mth3 nvarchar(max),
+@rth3 nvarchar(max),
+@grs3 nvarchar(max),
+@mtl3 nvarchar(max),
+@sala3 nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_ma]
+          (
+[mth],
+[rth],
+[grs],
+[mtl],
+[sala],
+[mth2],
+[rth2],
+[grs2],
+[mtl2],
+[sala2],
+[mth3],
+[rth3],
+[grs3],
+[mtl3],
+[sala3]
+		  )
+    VALUES
+            (
+@mth,
+@rth,
+@grs,
+@mtl,
+@sala,
+@mth2,
+@rth2,
+@grs2,
+@mtl2,
+@sala2,
+@mth3,
+@rth3,
+@grs3,
+@mtl3,
+@sala3
+            )
+Select @@Identity
+GO
+
+
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addtt') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addtt
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addtt
+@tozihat nvarchar(max),
+@natijeh nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_ttable]
+          (
+		  [tozihat],
+[natijeh]
+		  )
+    VALUES
+            (
+			@tozihat,
+@natijeh
+            )
+Select @@Identity
+GO
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addmk') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addmk
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addmk
+@shoghl1 nvarchar(max),
+@shoro1 nvarchar(max),
+@payan1 nvarchar(max),
+@mahal1 nvarchar(max),
+@elat1 nvarchar(max),
+@shoghl2 nvarchar(max),
+@shoro2 nvarchar(max),
+@payan2 nvarchar(max),
+@mahal2 nvarchar(max),
+@elat2 nvarchar(max),
+@shoghl3 nvarchar(max),
+@shoro3 nvarchar(max),
+@payan3 nvarchar(max),
+@mahal3 nvarchar(max),
+@elat3 nvarchar(max),
+@shoghl4 nvarchar(max),
+@shoro4 nvarchar(max),
+@payan4 nvarchar(max),
+@mahal4 nvarchar(max),
+@elat4 nvarchar(max),
+@shoghl5 nvarchar(max),
+@shoro5 nvarchar(max),
+@payan5 nvarchar(max),
+@mahal5 nvarchar(max),
+@elat5 nvarchar(max)
+AS
+INSERT INTO {databaseOwner}[{objectQualifier}FaavanResume1_mk]
+          (
+[shoghl1],
+[shoro1],
+[payan1],
+[mahal1],
+[elat1],
+[shoghl2],
+[shoro2],
+[payan2],
+[mahal2],
+[elat2],
+[shoghl3],
+[shoro3],
+[payan3],
+[mahal3],
+[elat3],
+[shoghl4],
+[shoro4],
+[payan4],
+[mahal4],
+[elat4],
+[shoghl5],
+[shoro5],
+[payan5],
+[mahal5],
+[elat5]
+		  )
+    VALUES
+            (
+@shoghl1,
+@shoro1,
+@payan1,
+@mahal1,
+@elat1,
+@shoghl2,
+@shoro2,
+@payan2,
+@mahal2,
+@elat2,
+@shoghl3,
+@shoro3,
+@payan3,
+@mahal3,
+@elat3,
+@shoghl4,
+@shoro4,
+@payan4,
+@mahal4,
+@elat4,
+@shoghl5,
+@shoro5,
+@payan5,
+@mahal5,
+@elat5
+            )
+Select @@Identity
+GO
+
+
+/************************************************************/
+/*****              GETALL CODE                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getall') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getall
+	GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getall
+@pid int
+AS
+SELECT * FROM {databaseOwner}{objectQualifier}FaavanResume1_pr pr INNER JOIN {databaseOwner}{objectQualifier}FaavanResume1_ma ma ON pr.pid = ma.pid  INNER JOIN {databaseOwner}{objectQualifier}FaavanResume1_mk mk ON ma.pid = mk.pid WHERE ma.pid = @pid
+GO
+
+/************************************************************/
+/*****              GET ALL ROWS CODE                     *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getallrows') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getallrows
+	GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getallrows
+AS
+SELECT * FROM {databaseOwner}{objectQualifier}FaavanResume1_pr pr INNER JOIN {databaseOwner}{objectQualifier}FaavanResume1_ma ma ON pr.pid = ma.pid  INNER JOIN {databaseOwner}{objectQualifier}FaavanResume1_mk mk ON ma.pid = mk.pid
+GO
+
+
+/************************************************************/
+/*****              GET MOSHAKHASAT                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getpr') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getpr
+	GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getpr
+@pid int
+AS
+SELECT pid as 'شماره',nms as 'نام', fml as 'نام خانوادگی' , fname as 'نام پدر' , bday as 'تاریخ تولد' , iid as 'شماره شناسنامه' , ms as 'محل صدور' , shotele as 'شماره تلفن' , emails as 'ایمیل' , address as 'آدرس محل سکونت' , nv as 'وضعیت خدمت سربازی' FROM {databaseOwner}{objectQualifier}FaavanResume1_pr pr WHERE @pid = pr.pid
+GO
+
+/************************************************************/
+/*****           GET SAVABEGH (SHOGHL)                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_savabegh') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_savabegh
+	GO
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_savabegh
+@pid int
+AS
+SELECT shoghl1 as 'سابقه ی کاری',shoro1 as 'تاریخ شروع',mahal1 as 'محل کار',payan1 as 'تاریخ پایان',elat1 as 'علت پایان همکاری',shoghl2 as 'سابقه ی کاری',shoro2 as 'تاریخ شروع',mahal2 as 'محل کار',payan2 as 'تاریخ پایان',elat2 as 'علت پایان همکاری',shoghl3 as 'سابقه ی کاری',shoro3 as 'تاریخ شروع',mahal3 as 'محل کار',payan3 as 'تاریخ پایان',elat3 as 'علت پایان همکاری',shoghl4 as 'سابقه ی کاری',shoro4 as 'تاریخ شروع',mahal4 as 'محل کار',payan4 as 'تاریخ پایان',elat4 as 'علت پایان همکاری',shoghl5 as 'سابقه ی کاری',shoro5 as 'تاریخ شروع',mahal5 as 'محل کار',payan5 as 'تاریخ پایان',elat5 as 'علت پایان همکاری'  FROM  {databaseOwner}{objectQualifier}FaavanResume1_mk mk WHERE mk.pid = @pid
+GO
+
+
+/************************************************************/
+/*****              GET RADDS CODE                     *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_gradds') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gradds
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gradds
+@pid int
+AS SELECT radds.al as 'علایق و ضمینه های همکاری' FROM {databaseOwner}{objectQualifier}FaavanResume1_radds radds  WHERE radds.pid = @pid
+GO
+
+/************************************************************/
+/*****              GET TAHSILAT CODE                     *****/
+/************************************************************/
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_tahsilat') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_tahsilat
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_tahsilat
+@pid int
+AS SELECT mth as 'مقطع تحصیلی',rth as 'رشته ی تحصیلی',grs as 'گرایش',mtl as 'محل تحصیل',sala as 'تاریخ اخذ مدرک',mth2 as 'مقطع تحصیلی',rth2 as 'رشته ی تحصیلی',grs2 as 'گرایش',mtl2 as 'محل تحصیل',sala2 as 'تاریخ اخذ مدرک',mth3 as 'مقطع تحصیلی',rth3 as 'رشته ی تحصیلی',grs3 as 'گرایش',mtl3 as 'محل تحصیل',sala3 as 'تاریخ اخذ مدرک'  FROM {databaseOwner}{objectQualifier}FaavanResume1_ma ma WHERE @pid = ma.pid
+GO
+
+
+
+/************************************************************/
+/*****              PICTURE CODES                     *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_pic]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_pic]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}FaavanResume1_pic
+(
+pid int NOT NULL IDENTITY(1,1),
+picpid int NULL,
+name nvarchar(MAX) NULL,
+contenttype nvarchar(MAX) NULL,
+data varbinary(MAX) NULL
+)ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+ALTER TABLE {databaseOwner}{objectQualifier}FaavanResume1_pic ADD CONSTRAINT
+    PK_{objectQualifier}FaavanResume1_pic PRIMARY KEY CLUSTERED
+    (
+    pid
+    ) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+
+/************************************************************/
+/*****              GET PICTURE USELESS         *****/
+/************************************************************/
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getpic') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getpic
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getpic
+@picpid int
+AS SELECT pic.picpid FROM {databaseOwner}{objectQualifier}FaavanResume1_pic pic WHERE pic.picpid = @picpid
+GO
+
+/************************************************************/
+/*****              COUNT PICTURE CODE                    *****/
+/************************************************************/
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_countpic') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_countpic
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_countpic
+as
+SELECT COUNT(*) FROM {databaseOwner}{objectQualifier}FaavanResume1_pic
+GO
+
+
+/************************************************************/
+/*****              UPPDATE MK                     *****/
+/************************************************************/
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getnatijeh') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getnatijeh
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getnatijeh
+@pid int
+AS SELECT tt.natijeh FROM {databaseOwner}{objectQualifier}FaavanResume1_ttable tt  WHERE tt.pid = @pid
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_gettozihat') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gettozihat
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gettozihat
+@pid int
+AS SELECT tt.tozihat FROM {databaseOwner}{objectQualifier}FaavanResume1_ttable tt  WHERE tt.pid = @pid
+GO
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_uppmktozihat') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmktozihat
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmktozihat
+      @pid int,
+@tozihat nvarchar(MAX)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_ttable]
+    Set 
+tozihat = @tozihat
+WHERE
+	pid = @pid
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_uppmknatijeh') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmknatijeh
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmknatijeh
+      @pid int,
+@natijeh nvarchar(MAX)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_ttable]
+    Set 
+natijeh = @natijeh
+WHERE
+	pid = @pid
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_uppmkboth') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmkboth
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmkboth
+      @pid int,
+@tozihat nvarchar(MAX),
+@natijeh nvarchar(MAX)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_ttable]
+    Set 
+tozihat = @tozihat,
+natijeh = @natijeh
+WHERE
+	pid = @pid
+GO
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_uppmk') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmk
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppmk
+      @pid int,
+@shoghl1 nvarchar(MAX),
+@shoro1 nvarchar(MAX),
+@payan1 nvarchar(MAX),
+@mahal1 nvarchar(MAX),
+@elat1 nvarchar(MAX),
+@shoghl2 nvarchar(MAX),
+@shoro2 nvarchar(MAX),
+@payan2 nvarchar(MAX),
+@mahal2 nvarchar(MAX),
+@elat2 nvarchar(MAX),
+@shoghl3 nvarchar(MAX),
+@shoro3 nvarchar(MAX),
+@payan3 nvarchar(MAX),
+@mahal3 nvarchar(MAX),
+@elat3 nvarchar(MAX),
+@shoghl4 nvarchar(MAX),
+@shoro4 nvarchar(MAX),
+@payan4 nvarchar(MAX),
+@mahal4 nvarchar(MAX),
+@elat4 nvarchar(MAX),
+@shoghl5 nvarchar(MAX),
+@shoro5 nvarchar(MAX),
+@payan5 nvarchar(MAX),
+@mahal5 nvarchar(MAX),
+@elat5 nvarchar(MAX)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_mk]
+    Set 
+shoghl1 = @shoghl1,
+shoro1 = @shoro1,
+payan1 = @payan1,
+mahal1 = @mahal1,
+elat1 = @elat1,
+shoghl2 = @shoghl2,
+shoro2 = @shoro2,
+payan2 = @payan2,
+mahal2 = @mahal2,
+elat2 = @elat2,
+shoghl3 = @shoghl3,
+shoro3 = @shoro3,
+payan3 = @payan3,
+mahal3 = @mahal3,
+elat3 = @elat3,
+shoghl4 = @shoghl4,
+shoro4 = @shoro4,
+payan4 = @payan4,
+mahal4 = @mahal4,
+elat4 = @elat4,
+shoghl5 = @shoghl5,
+shoro5 = @shoro5,
+payan5 = @payan5,
+mahal5 = @mahal5,
+elat5 = @elat5
+WHERE
+	pid = @pid
+GO
+
+
+/************************************************************/
+/*****              UPPDATE MA                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_uppma') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_uppma
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Uppma
+      @pid int,
+@mth nvarchar(MAX),
+@rth nvarchar(MAX),
+@grs nvarchar(MAX),
+@mtl nvarchar(MAX),
+@sala nvarchar(MAX),
+@mth2 nvarchar(MAX),
+@rth2 nvarchar(MAX),
+@grs2 nvarchar(MAX),
+@mtl2 nvarchar(MAX),
+@sala2 nvarchar(MAX),
+@mth3 nvarchar(MAX),
+@rth3 nvarchar(MAX),
+@grs3 nvarchar(MAX),
+@mtl3 nvarchar(MAX),
+@sala3 nvarchar(MAX)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_ma]
+    Set 
+mth = @mth,
+rth = @rth,
+grs = @grs,
+mtl = @mtl,
+sala = @sala,
+mth2 = @mth2,
+rth2 = @rth2,
+grs2 = @grs2,
+mtl2 = @mtl2,
+sala2 = @sala2,
+mth3 = @mth3,
+rth3 = @rth3,
+grs3 = @grs3,
+mtl3 = @mtl3,
+sala3 = @sala3
+WHERE
+	pid = @pid
+GO
+
+
+
+
+/************************************************************/
+/*****              UPPDATE PR                    *****/
+/************************************************************/
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_upppr') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_upppr
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Upppr
+      @pid int,
+@nms nvarchar(max),
+@fml nvarchar(max),
+@fname nvarchar(max),
+@bday nvarchar(max),
+@iid nvarchar(max),
+@ms nvarchar(max),
+@nv nvarchar(max),
+@shotele nvarchar(max),
+@emails nvarchar(max),
+@address nvarchar(max)
+AS
+UPDATE dbo.[{objectQualifier}FaavanResume1_pr]
+    Set 
+nms = @nms,
+fml = @fml,
+fname = @fname,
+bday = @bday,
+iid = @iid,
+ms = @ms,
+nv = @nv,
+shotele = @shotele,
+emails = @emails,
+address = @address
+WHERE
+	pid = @pid
+GO

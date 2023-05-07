@@ -1,0 +1,73 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_getpic') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_getpic
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_pic]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_pic]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_pr]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_pr]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_ma]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_ma]
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_mk]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_mk]
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addpr') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addpr
+GO
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addma') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addma
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Addmk') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Addmk
+GO
+
+
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Gpersonel') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Gpersonel
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_Uppersonel') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_Uppersonel
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = 
+OBJECT_ID(N'{databaseOwner}[{objectQualifier}FaavanResume1_radds]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}FaavanResume1_radds]
+GO
+
+IF EXISTS (SELECT * FROM dbo.sysobjects WHERE id = object_id(N'{databaseOwner}{objectQualifier}FaavanResume1_gradds') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+    DROP PROCEDURE {databaseOwner}{objectQualifier}FaavanResume1_gradds
+GO
+
+
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

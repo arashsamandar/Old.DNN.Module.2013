@@ -1,0 +1,23 @@
+﻿<div dir="rtl" class="License">
+	<h3>License</h3>
+	<p class="Owner">
+		شرکت آرمان سیستم فرتاک برتر ( گروه فاوان )  <a href=http://www.favangroup.com>http://www.favangroup.com</a></br>
+		Copyright (c) 2011</br>	
+		by DotNetNuke Corporation</br>
+	</p>
+    <p dir="rtl">
+        کلیه حقوق این اثر برای شرکت آرمان سیستم فرتاک برتر ( گروه فاوان ) محفوظ است
+  	
+  	برای ارتباط با ما می توانید با روشهای مختلف و با استفاده از اطلاعات زیر اقدام نمایید :
+  	آدرس پستی : 	تهران - ایران - صندوق پستی شماره 3577-14155
+  	تلفن : 	44065532 (21) 98+ 
+
+	  	
+
+44034896 (21) 98+ 
+  	فکس : 	89776530 (21) 98+ 
+  	email : 	info@favangroup.com
+    </p>
+    <p>
+    </p>
+</div>

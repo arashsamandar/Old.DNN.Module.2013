@@ -1,0 +1,5 @@
+C:\inetpub\wwwroot\ddn\bin\FaavanResume1.dll
+C:\inetpub\wwwroot\ddn\bin\FaavanResume1.pdb
+C:\inetpub\wwwroot\ddn\bin\FaavanResume1.xml
+C:\inetpub\wwwroot\ddn\DesktopModules\FaavanResume1\obj\Release\FaavanResume1.dll
+C:\inetpub\wwwroot\ddn\DesktopModules\FaavanResume1\obj\Release\FaavanResume1.pdb
